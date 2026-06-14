@@ -227,19 +227,48 @@ function renderCommodity(data) {
 // ── 종목 테이블
 function renderStocksTable() {
   const tbody = document.getElementById('stocksTbody');
-  const list = currentTab === 'volume' ? stocksData.top_volume : stocksData.top_gainers;
+  const th4 = document.getElementById('thCol4');
+  const th5 = document.getElementById('thCol5');
+  const isVolume = currentTab === 'volume';
+  const list = isVolume ? stocksData.top_volume : stocksData.top_gainers;
+
+  // 헤더 변경
+  if (th4 && th5) {
+    if (isVolume) {
+      th4.textContent = '전일종가';
+      th5.textContent = '거래대금';
+    } else {
+      th4.textContent = '전일종가';
+      th5.textContent = '등락률';
+    }
+  }
+
   if (!list || list.length === 0) {
     tbody.innerHTML = `<tr><td colspan="5" class="loading-td">데이터 없음 (장 마감 후에는 표시되지 않을 수 있습니다)</td></tr>`;
     return;
   }
-  tbody.innerHTML = list.map((item, i) => `
-    <tr>
-      <td class="rank">${i + 1}</td>
-      <td class="name">${item.name}</td>
-      <td class="price">${item.price}</td>
-      <td class="pct ${item.direction}">${arrow(item.direction)} ${item.change_pct}</td>
-      <td class="vol">${item.volume}</td>
-    </tr>`).join('');
+
+  if (isVolume) {
+    // 거래대금 상위: 순위 / 종목명 / 현재가 / 전일종가 / 거래대금
+    tbody.innerHTML = list.map((item, i) => `
+      <tr>
+        <td class="rank">${i + 1}</td>
+        <td class="name">${item.name}</td>
+        <td class="price">${item.price}</td>
+        <td class="prev">${item.prev_close || '-'}</td>
+        <td class="vol">${item.volume || '-'}</td>
+      </tr>`).join('');
+  } else {
+    // 상승률 상위: 순위 / 종목명 / 현재가 / 전일종가 / 등락률
+    tbody.innerHTML = list.map((item, i) => `
+      <tr>
+        <td class="rank">${i + 1}</td>
+        <td class="name">${item.name}</td>
+        <td class="price">${item.price}</td>
+        <td class="prev">${item.prev_close || '-'}</td>
+        <td class="pct ${item.direction || 'up'}">${arrow(item.direction || 'up')} ${item.change_pct}</td>
+      </tr>`).join('');
+  }
 }
 
 // ── 뉴스
