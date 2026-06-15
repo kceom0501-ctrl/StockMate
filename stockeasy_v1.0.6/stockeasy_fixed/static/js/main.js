@@ -232,7 +232,6 @@ function renderStocksTable() {
   const isVolume = currentTab === 'volume';
   const list = isVolume ? stocksData.top_volume : stocksData.top_gainers;
 
-  // 헤더 변경
   if (th4 && th5) {
     if (isVolume) {
       th4.textContent = '전일종가';
@@ -254,18 +253,18 @@ function renderStocksTable() {
       <tr>
         <td class="rank">${i + 1}</td>
         <td class="name">${item.name}</td>
-        <td class="price">${item.price}</td>
-        <td class="prev">${item.prev_close || '-'}</td>
+        <td class="price">${item.price?.toLocaleString() || item.price}</td>
+        <td class="prev">${item.prev_close?.toLocaleString() || item.prev_close || '-'}</td>
         <td class="vol">${item.volume || '-'}</td>
       </tr>`).join('');
   } else {
-    // 상승률 상위: 순위 / 종목명 / 현재가 / 등락률 / 전일종가
+    // 상승률 상위: 순위 / 종목명 / 현재가 / 전일종가 / 등락률
     tbody.innerHTML = list.map((item, i) => `
       <tr>
         <td class="rank">${i + 1}</td>
         <td class="name">${item.name}</td>
-        <td class="price">${item.price}</td>
-        <td class="prev">${item.prev_close || '-'}</td>
+        <td class="price">${item.price?.toLocaleString() || item.price}</td>
+        <td class="prev">${item.prev_close?.toLocaleString() || item.prev_close || '-'}</td>
         <td class="pct ${item.direction || 'up'}">${arrow(item.direction || 'up')} ${item.change_pct}</td>
       </tr>`).join('');
   }
