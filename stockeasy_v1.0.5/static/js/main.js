@@ -238,8 +238,8 @@ function renderStocksTable() {
       th4.textContent = '전일종가';
       th5.textContent = '거래대금';
     } else {
-      th4.textContent = '등락률';
-      th5.textContent = '전일종가';
+      th4.textContent = '전일종가';
+      th5.textContent = '등락률';
     }
   }
 
