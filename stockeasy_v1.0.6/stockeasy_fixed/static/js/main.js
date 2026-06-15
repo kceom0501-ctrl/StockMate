@@ -238,8 +238,8 @@ function renderStocksTable() {
       th4.textContent = '전일종가';
       th5.textContent = '거래대금';
     } else {
-      th4.textContent = '등락률';
-      th5.textContent = '전일종가';
+      th4.textContent = '전일종가';
+      th5.textContent = '등락률';
     }
   }
 
@@ -265,8 +265,8 @@ function renderStocksTable() {
         <td class="rank">${i + 1}</td>
         <td class="name">${item.name}</td>
         <td class="price">${item.price}</td>
-        <td class="pct ${item.direction || 'up'}">${arrow(item.direction || 'up')} ${item.change_pct}</td>
         <td class="prev">${item.prev_close || '-'}</td>
+        <td class="pct ${item.direction || 'up'}">${arrow(item.direction || 'up')} ${item.change_pct}</td>
       </tr>`).join('');
   }
 }
