@@ -238,8 +238,8 @@ function renderStocksTable() {
       th4.textContent = '전일종가';
       th5.textContent = '거래대금';
     } else {
-      th4.textContent = '전일종가';
-      th5.textContent = '등락률';
+      th4.textContent = '등락률';
+      th5.textContent = '전일종가';
     }
   }
 
@@ -260,7 +260,6 @@ function renderStocksTable() {
       </tr>`).join('');
   } else {
     // 상승률 상위: 순위 / 종목명 / 현재가 / 등락률 / 전일종가
-    // 헤더도 동일하게 변경 (등락률 → 전일종가 순)
     tbody.innerHTML = list.map((item, i) => `
       <tr>
         <td class="rank">${i + 1}</td>
