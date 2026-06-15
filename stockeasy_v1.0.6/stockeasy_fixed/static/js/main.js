@@ -266,7 +266,7 @@ function renderStocksTable() {
         <td class="name">${item.name}</td>
         <td class="price">${item.price}</td>
         <td class="prev">${item.prev_close || '-'}</td>
-        <td class="pct ${item.direction || 'up'}">${arrow(item.direction || 'up')} ${item.change_pct}</td>
+        <td class="prev">${item.prev_close || '-'}</td>
       </tr>`).join('');
   }
 }
